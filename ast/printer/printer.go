@@ -39,114 +39,212 @@ func (p *Printer) PrintNode(node ast.Node) {
 	switch n := node.(type) {
 	case *ast.AnonymousFunction:
 		p.PrintAnonymousFunction(n)
+	case ast.AnonymousFunction:
+		p.PrintAnonymousFunction(&n)
 	case *ast.ArrayAppendExpr:
 		p.PrintArrayAppendExpression(n)
+	case ast.ArrayAppendExpr:
+		p.PrintArrayAppendExpression(&n)
 	case *ast.ArrayExpr:
 		p.PrintArrayExpression(n)
+	case ast.ArrayExpr:
+		p.PrintArrayExpression(&n)
 	case *ast.ArrayLookupExpr:
 		p.PrintArrayLookupExpression(n)
+	case ast.ArrayLookupExpr:
+		p.PrintArrayLookupExpression(&n)
 	case *ast.ArrayPair:
 		p.PrintArrayPair(n)
-	case ast.AssignmentExpr:
-		p.PrintAssignmentExpression(&n)
+	case ast.ArrayPair:
+		p.PrintArrayPair(&n)
 	case *ast.AssignmentExpr:
 		p.PrintAssignmentExpression(n)
+	case ast.AssignmentExpr:
+		p.PrintAssignmentExpression(&n)
 	case *ast.BinaryExpr:
 		p.PrintBinaryExpression(n)
+	case ast.BinaryExpr:
+		p.PrintBinaryExpression(&n)
 	case *ast.Block:
 		p.PrintBlock(n)
+	case ast.Block:
+		p.PrintBlock(&n)
 	case *ast.BreakStmt:
 		p.PrintBreakStmt(n)
+	case ast.BreakStmt:
+		p.PrintBreakStmt(&n)
 	case *ast.CatchStmt:
 		p.PrintCatchStmt(n)
+	case ast.CatchStmt:
+		p.PrintCatchStmt(&n)
 	case *ast.Class:
 		p.PrintClass(n)
+	case ast.Class:
+		p.PrintClass(&n)
 	case *ast.ClassExpr:
 		p.PrintClassExpression(n)
+	case ast.ClassExpr:
+		p.PrintClassExpression(&n)
 	case *ast.Constant:
 		p.PrintConstant(n)
+	case ast.Constant:
+		p.PrintConstant(&n)
 	case *ast.ConstantExpr:
 		p.PrintConstantExpression(n)
+	case ast.ConstantExpr:
+		p.PrintConstantExpression(&n)
 	case *ast.ContinueStmt:
 		p.PrintContinueStmt(n)
+	case ast.ContinueStmt:
+		p.PrintContinueStmt(&n)
 	case *ast.DeclareBlock:
 		p.PrintDeclareBlock(n)
+	case ast.DeclareBlock:
+		p.PrintDeclareBlock(&n)
 	case *ast.DoWhileStmt:
 		p.PrintDoWhileStmt(n)
+	case ast.DoWhileStmt:
+		p.PrintDoWhileStmt(&n)
 	case *ast.EchoStmt:
 		p.PrintEchoStmt(n)
+	case ast.EchoStmt:
+		p.PrintEchoStmt(&n)
 	case *ast.EmptyStatement:
 		p.PrintEmptyStatement(n)
+	case ast.EmptyStatement:
+		p.PrintEmptyStatement(&n)
 	case *ast.ExitStmt:
 		p.PrintExitStmt(n)
-	case ast.ExprStmt:
-		p.PrintExpressionStmt(&n)
+	case ast.ExitStmt:
+		p.PrintExitStmt(&n)
 	case *ast.ExprStmt:
 		p.PrintExpressionStmt(n)
+	case ast.ExprStmt:
+		p.PrintExpressionStmt(&n)
 	case *ast.ForStmt:
 		p.PrintForStmt(n)
+	case ast.ForStmt:
+		p.PrintForStmt(&n)
 	case *ast.ForeachStmt:
 		p.PrintForeachStmt(n)
+	case ast.ForeachStmt:
+		p.PrintForeachStmt(&n)
 	case *ast.FunctionArgument:
 		p.PrintFunctionArgument(n)
+	case ast.FunctionArgument:
+		p.PrintFunctionArgument(&n)
 	case *ast.FunctionCallExpr:
 		p.PrintFunctionCallExpression(n)
+	case ast.FunctionCallExpr:
+		p.PrintFunctionCallExpression(&n)
 	case *ast.FunctionCallStmt:
 		p.PrintFunctionCallStmt(n)
+	case ast.FunctionCallStmt:
+		p.PrintFunctionCallStmt(&n)
 	case *ast.FunctionDefinition:
 		p.PrintFunctionDefinition(n)
+	case ast.FunctionDefinition:
+		p.PrintFunctionDefinition(&n)
 	case *ast.FunctionStmt:
 		p.PrintFunctionStmt(n)
+	case ast.FunctionStmt:
+		p.PrintFunctionStmt(&n)
 	case *ast.GlobalDeclaration:
 		p.PrintGlobalDeclaration(n)
+	case ast.GlobalDeclaration:
+		p.PrintGlobalDeclaration(&n)
 	case *ast.Identifier:
 		p.PrintIdentifier(n)
+	case ast.Identifier:
+		p.PrintIdentifier(&n)
 	case *ast.IfStmt:
 		p.PrintIfStmt(n)
+	case ast.IfStmt:
+		p.PrintIfStmt(&n)
 	case *ast.Include:
 		p.PrintInclude(n)
+	case ast.Include:
+		p.PrintInclude(&n)
 	case *ast.IncludeStmt:
 		p.PrintIncludeStmt(n)
+	case ast.IncludeStmt:
+		p.PrintIncludeStmt(&n)
 	case *ast.Interface:
 		p.PrintInterface(n)
+	case ast.Interface:
+		p.PrintInterface(&n)
 	case *ast.ListStatement:
 		p.PrintListStatement(n)
+	case ast.ListStatement:
+		p.PrintListStatement(&n)
 	case *ast.Literal:
 		p.PrintLiteral(n)
+	case ast.Literal:
+		p.PrintLiteral(&n)
 	case *ast.Method:
 		p.PrintMethod(n)
+	case ast.Method:
+		p.PrintMethod(&n)
 	case *ast.MethodCallExpr:
 		p.PrintMethodCallExpression(n)
+	case ast.MethodCallExpr:
+		p.PrintMethodCallExpression(&n)
 	case *ast.NewCallExpr:
 		p.PrintNewExpression(n)
+	case ast.NewCallExpr:
+		p.PrintNewExpression(&n)
 	case *ast.Property:
 		p.PrintProperty(n)
+	case ast.Property:
+		p.PrintProperty(&n)
 	case *ast.PropertyCallExpr:
 		p.PrintPropertyExpression(n)
+	case ast.PropertyCallExpr:
+		p.PrintPropertyExpression(&n)
 	case *ast.ReturnStmt:
 		p.PrintReturnStmt(n)
-	case ast.ShellCommand:
-		p.PrintShellCommand(&n)
+	case ast.ReturnStmt:
+		p.PrintReturnStmt(&n)
 	case *ast.ShellCommand:
 		p.PrintShellCommand(n)
+	case ast.ShellCommand:
+		p.PrintShellCommand(&n)
 	case *ast.StaticVariableDeclaration:
 		p.PrintStaticVariableDeclaration(n)
+	case ast.StaticVariableDeclaration:
+		p.PrintStaticVariableDeclaration(&n)
 	case *ast.SwitchCase:
 		p.PrintSwitchCase(n)
+	case ast.SwitchCase:
+		p.PrintSwitchCase(&n)
 	case *ast.SwitchStmt:
 		p.PrintSwitchStmt(n)
+	case ast.SwitchStmt:
+		p.PrintSwitchStmt(&n)
 	case *ast.TernaryCallExpr:
 		p.PrintTernaryExpression(n)
+	case ast.TernaryCallExpr:
+		p.PrintTernaryExpression(&n)
 	case *ast.ThrowStmt:
 		p.PrintThrowStmt(n)
+	case ast.ThrowStmt:
+		p.PrintThrowStmt(&n)
 	case *ast.TryStmt:
 		p.PrintTryStmt(n)
+	case ast.TryStmt:
+		p.PrintTryStmt(&n)
 	case *ast.UnaryCallExpr:
 		p.PrintUnaryExpression(n)
+	case ast.UnaryCallExpr:
+		p.PrintUnaryExpression(&n)
 	case *ast.Variable:
 		p.PrintVariable(n)
+	case ast.Variable:
+		p.PrintVariable(&n)
 	case *ast.WhileStmt:
 		p.PrintWhileStmt(n)
+	case ast.WhileStmt:
+		p.PrintWhileStmt(&n)
 	default:
 		fmt.Fprintf(p.w, `/* Unsupported node type: %T */`, n)
 	}
