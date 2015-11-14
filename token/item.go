@@ -35,8 +35,5 @@ func (i Item) String() string {
 	case Error:
 		return i.Val
 	}
-	if len(i.Val) > 10 {
-		return fmt.Sprintf("%v:%.10q...", i.Typ, i.Val)
-	}
 	return fmt.Sprintf("%v:%q", i.Typ, i.Val)
 }

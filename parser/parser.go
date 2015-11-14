@@ -75,7 +75,7 @@ type ParseError struct {
 }
 
 func (p ParseError) Error() string {
-	return fmt.Sprintf("%s:%d: %s", p.File.Name, p.Line, p.error)
+	return fmt.Sprintf("File %s - Position %d:%d - Error %s", p.File.Name, p.Line, p.Column, p.error)
 }
 
 func (p ParseError) String() string {
@@ -222,7 +222,8 @@ func errorf(p *Parser, str string, args ...interface{}) ParseError {
 	e := ParseError{error: fmt.Errorf(str, args...)}
 	if p != nil {
 		e.File = p.file
-		e.Line = 0
+		e.Line = p.current.Begin.Line
+		e.Column = p.current.Begin.Column
 	}
 	return e
 }

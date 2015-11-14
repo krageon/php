@@ -49,8 +49,7 @@ func lexHTML(l *lexer) stateFn {
 func lexPHPBegin(l *lexer) stateFn {
 	if strings.HasPrefix(l.input[l.pos:], longPHPBegin) {
 		l.pos += len(longPHPBegin)
-	}
-	if strings.HasPrefix(l.input[l.pos:], shortPHPBegin) {
+	} else if strings.HasPrefix(l.input[l.pos:], shortPHPBegin) {
 		l.pos += len(shortPHPBegin)
 	}
 	l.emit(token.PHPBegin)
