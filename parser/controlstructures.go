@@ -16,12 +16,9 @@ func (p *Parser) parseIf() *ast.IfStmt {
 			n.Branches = append(n.Branches, p.parseIfBranch())
 		case token.Else:
 			p.next()
-			if p.current.Typ == token.If {
-				n.Branches = append(n.Branches, p.parseIfBranch())
-			} else {
-				n.ElseBlock = p.parseControlBlock(token.EndIf)
-				return n
-			}
+			n.ElseBlock = p.parseControlBlock(token.EndIf)
+			p.backup()
+			return n
 		default:
 			if p.current.Typ != token.EndIf {
 				p.backup()
@@ -85,12 +82,15 @@ func (p *Parser) parseForeach() ast.Statement {
 
 func (p *Parser) parseControlBlock(end ...token.Token) ast.Statement {
 	// try to parse this in bash style, but it requires an end token
-	if len(end) > 0 && p.current.Typ == token.TernaryOperator2 {
-		return p.parseStatementsUntil(end...)
+	if len(end) > 0 && p.current.Typ.String() == token.TernaryOperator2.String() {
+		stmt := p.parseStatementsUntil(end...)
+		p.next()
+		return stmt
+	} else {
+		stmt := p.parseStmt()
+		p.next()
+		return stmt
 	}
-	stmt := p.parseStmt()
-	p.next()
-	return stmt
 }
 
 func (p *Parser) parseFor() ast.Statement {

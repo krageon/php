@@ -123,7 +123,13 @@ func (c compoundType) Contains(t Type) bool {
 
 // Union returns a new type that includes both the receiver and the argument.
 func (c compoundType) Union(t Type) Type {
-	c[t] = struct{}{}
+	if ct, ok := t.(compoundType); ok {
+		for it := range ct {
+			c[it] = struct{}{}
+		}
+	} else {
+		c[t] = struct{}{}
+	}
 	return c
 }
 

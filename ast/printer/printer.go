@@ -273,7 +273,7 @@ func (p *Printer) PrintEmptyStatement(e *ast.EmptyStatement) {}
 
 func (p *Printer) PrintBinaryExpression(b *ast.BinaryExpr) {
 	p.PrintNode(b.Antecedent)
-	fmt.Fprintf(p.w, "%s", b.Operator)
+	fmt.Fprintf(p.w, " %s ", b.Operator)
 	p.PrintNode(b.Subsequent)
 }
 
@@ -564,21 +564,18 @@ func (p *Printer) PrintIfStmt(i *ast.IfStmt) {
 
 	io.WriteString(p.w, "if (")
 	p.PrintNode(i.Branches[0].Condition)
-	io.WriteString(p.w, ") {\n")
+	io.WriteString(p.w, ") ")
 	p.PrintNode(i.Branches[0].Block)
-	io.WriteString(p.w, "\n}")
 
 	for _, branch := range i.Branches[1:] {
 		io.WriteString(p.w, " else if (")
 		p.PrintNode(branch.Condition)
-		io.WriteString(p.w, ") {\n")
+		io.WriteString(p.w, ") ")
 		p.PrintNode(branch.Block)
-		io.WriteString(p.w, "\n}")
 	}
 	if i.ElseBlock != nil {
-		io.WriteString(p.w, " else {\n")
+		io.WriteString(p.w, " else ")
 		p.PrintNode(i.ElseBlock)
-		io.WriteString(p.w, "\n}")
 	}
 }
 

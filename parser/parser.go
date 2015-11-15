@@ -222,8 +222,7 @@ func errorf(p *Parser, str string, args ...interface{}) ParseError {
 	e := ParseError{error: fmt.Errorf(str, args...)}
 	if p != nil {
 		e.File = p.file
-		e.Line = p.current.Begin.Line
-		e.Column = p.current.Begin.Column
+		e.Line = p.current.End.Line
 	}
 	return e
 }
