@@ -18,7 +18,7 @@ func init() {
 }
 
 func TestTranslation(t *testing.T) {
-	testsDir := path.Join(build.Default.GOPATH, "src", "github.com/stephens2424/php/passes/togo/testdata")
+	testsDir := path.Join(build.Default.GOPATH, "src", "github.com/krageon/php/passes/togo/testdata")
 	phpFiles, err := filepath.Glob(testsDir + "/*.php")
 	if err != nil {
 		t.Fatal(err)

@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/stephens2424/php/ast"
-	"github.com/stephens2424/php/parser"
-	"github.com/stephens2424/php/query"
+	"github.com/krageon/php/ast"
+	"github.com/krageon/php/parser"
+	"github.com/krageon/php/query"
 )
 
 func main() {

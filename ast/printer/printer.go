@@ -6,7 +6,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/stephens2424/php/ast"
+	"github.com/krageon/php/ast"
 )
 
 type Printer struct {
@@ -272,17 +272,26 @@ func (p *Printer) PrintGlobalDeclaration(g *ast.GlobalDeclaration) {
 func (p *Printer) PrintEmptyStatement(e *ast.EmptyStatement) {}
 
 func (p *Printer) PrintBinaryExpression(b *ast.BinaryExpr) {
-	fmt.Fprintf(p.w, "%s %s %s", b.Antecedent, b.Operator, b.Subsequent)
+	p.PrintNode(b.Antecedent)
+	fmt.Fprintf(p.w, "%s", b.Operator)
+	p.PrintNode(b.Subsequent)
 }
 
 func (p *Printer) PrintTernaryExpression(t *ast.TernaryCallExpr) {
-	fmt.Fprintf(p.w, "%s ? %s : %s", t.Condition, t.True, t.False)
+	p.PrintNode(t.Condition)
+	fmt.Fprintf(p.w, " ? ")
+	p.PrintNode(t.True)
+	fmt.Fprintf(p.w, " : ")
+	p.PrintNode(t.False)
 }
+
 func (p *Printer) PrintUnaryExpression(u *ast.UnaryCallExpr) {
 	if u.Preceding {
-		fmt.Fprintf(p.w, "%s%s", u.Operator, u.Operand)
+		fmt.Fprintf(p.w, "%s", u.Operator)
+		p.PrintNode(u.Operand)
 	}
-	fmt.Fprintf(p.w, "%s%s", u.Operand, u.Operator)
+	p.PrintNode(u.Operand)
+	fmt.Fprintf(p.w, "%s", u.Operator)
 }
 
 func (p *Printer) PrintEchoStmt(e *ast.EchoStmt) {
@@ -402,6 +411,7 @@ func (p *Printer) PrintFunctionStmt(f *ast.FunctionStmt) {
 	p.PrintNode(f.FunctionDefinition)
 	p.PrintNode(f.Body)
 }
+
 func (p *Printer) PrintAnonymousFunction(a *ast.AnonymousFunction) {
 	io.WriteString(p.w, "function (")
 	for i, arg := range a.Arguments {
@@ -437,6 +447,7 @@ func (p *Printer) PrintFunctionDefinition(fd *ast.FunctionDefinition) {
 	io.WriteString(p.w, ") ")
 
 }
+
 func (p *Printer) PrintFunctionArgument(fa *ast.FunctionArgument) {
 	buf := &bytes.Buffer{}
 	if fa.TypeHint != "" {
@@ -449,6 +460,7 @@ func (p *Printer) PrintFunctionArgument(fa *ast.FunctionArgument) {
 	}
 
 }
+
 func (p *Printer) PrintClass(c *ast.Class) {
 	io.WriteString(p.w, "class ")
 	io.WriteString(p.w, c.Name)
@@ -483,7 +495,6 @@ func (p *Printer) PrintClass(c *ast.Class) {
 	p.detab()
 	p.tab()
 	io.WriteString(p.w, "}")
-
 }
 
 func (p *Printer) PrintInterface(i *ast.Interface) {
@@ -509,7 +520,6 @@ func (p *Printer) PrintInterface(i *ast.Interface) {
 	}
 
 	io.WriteString(p.w, "}")
-
 }
 
 func (p *Printer) PrintProperty(pr *ast.Property) {
@@ -522,6 +532,7 @@ func (p *Printer) PrintProperty(pr *ast.Property) {
 	io.WriteString(p.w, ";")
 
 }
+
 func (p *Printer) PrintPropertyExpression(pr *ast.PropertyCallExpr) {
 	p.PrintNode(pr.Receiver)
 	io.WriteString(p.w, "->")
@@ -533,27 +544,41 @@ func (p *Printer) PrintClassExpression(c *ast.ClassExpr) {
 	io.WriteString(p.w, "::")
 	p.PrintNode(c.Expr)
 }
+
 func (p *Printer) PrintMethod(m *ast.Method) {
 	p.PrintVisibility(m.Visibility)
 	io.WriteString(p.w, " ")
 	p.PrintNode(m.FunctionStmt)
 }
+
 func (p *Printer) PrintMethodCallExpression(m *ast.MethodCallExpr) {
 	p.PrintNode(m.Receiver)
 	io.WriteString(p.w, "->")
 	p.PrintNode(m.FunctionCallExpr)
 }
+
 func (p *Printer) PrintIfStmt(i *ast.IfStmt) {
 	if len(i.Branches) == 0 {
 		return
 	}
 
-	fmt.Fprintf(p.w, "if (%s) {\n%s\n}", i.Branches[0].Condition, i.Branches[0].Block)
+	io.WriteString(p.w, "if (")
+	p.PrintNode(i.Branches[0].Condition)
+	io.WriteString(p.w, ") {\n")
+	p.PrintNode(i.Branches[0].Block)
+	io.WriteString(p.w, "\n}")
+
 	for _, branch := range i.Branches[1:] {
-		fmt.Fprintf(p.w, " else if (%s) {\n%s\n}", branch.Condition, branch.Block)
+		io.WriteString(p.w, " else if (")
+		p.PrintNode(branch.Condition)
+		io.WriteString(p.w, ") {\n")
+		p.PrintNode(branch.Block)
+		io.WriteString(p.w, "\n}")
 	}
 	if i.ElseBlock != nil {
-		fmt.Fprintf(p.w, " else {\n%s\n}", i.ElseBlock)
+		io.WriteString(p.w, " else {\n")
+		p.PrintNode(i.ElseBlock)
+		io.WriteString(p.w, "\n}")
 	}
 }
 

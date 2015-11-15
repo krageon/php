@@ -1,6 +1,6 @@
 package deadcode
 
-import "github.com/stephens2424/php/ast"
+import "github.com/krageon/php/ast"
 
 func DeadClasses(fs *ast.FileSet, entryPoints []string) []ast.Node {
 	knownClasses := AllTheClasses(fs)

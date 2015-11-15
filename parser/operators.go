@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"github.com/stephens2424/php/ast"
-	"github.com/stephens2424/php/token"
+	"github.com/krageon/php/ast"
+	"github.com/krageon/php/token"
 )
 
 type operationType int

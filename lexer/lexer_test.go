@@ -3,7 +3,7 @@ package lexer
 import (
 	"testing"
 
-	"github.com/stephens2424/php/token"
+	"github.com/krageon/php/token"
 )
 
 var testFile = `<?php

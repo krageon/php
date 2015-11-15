@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/stephens2424/php/token"
+	"github.com/krageon/php/token"
 )
 
 // longestToken is length of the longest token string

@@ -3,7 +3,7 @@ package parser
 import (
 	"testing"
 
-	"github.com/stephens2424/php/ast"
+	"github.com/krageon/php/ast"
 )
 
 func TestScope(t *testing.T) {

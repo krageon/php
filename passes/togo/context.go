@@ -3,7 +3,7 @@ package togo
 import (
 	goast "go/ast"
 
-	phpast "github.com/stephens2424/php/ast"
+	phpast "github.com/krageon/php/ast"
 )
 
 type context struct {

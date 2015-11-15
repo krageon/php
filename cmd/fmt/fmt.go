@@ -7,8 +7,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/stephens2424/php/ast/printer"
-	"github.com/stephens2424/php/parser"
+	"github.com/krageon/php/ast/printer"
+	"github.com/krageon/php/parser"
 )
 
 func main() {

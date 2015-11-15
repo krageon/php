@@ -8,9 +8,9 @@ import (
 	"os"
 	"runtime/pprof"
 
-	//"github.com/stephens2424/php/passes/typechecking"
-	"github.com/stephens2424/php/parser"
-	"github.com/stephens2424/php/passes/printing"
+	//"github.com/krageon/php/passes/typechecking"
+	"github.com/krageon/php/parser"
+	"github.com/krageon/php/passes/printing"
 )
 
 func main() {

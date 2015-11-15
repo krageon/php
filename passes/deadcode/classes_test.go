@@ -3,8 +3,8 @@ package deadcode
 import (
 	"testing"
 
-	"github.com/stephens2424/php/ast"
-	"github.com/stephens2424/php/parser"
+	"github.com/krageon/php/ast"
+	"github.com/krageon/php/parser"
 )
 
 func TestDeadClass(t *testing.T) {
@@ -31,7 +31,7 @@ func TestDeadClass(t *testing.T) {
 	}
 
 	var shouldBeDead = map[string]struct{}{
-		"buzz": struct{}{},
+		"buzz": {},
 	}
 
 	dead := DeadClasses(p.FileSet, []string{"test.php"})
@@ -44,7 +44,7 @@ func TestDeadClass(t *testing.T) {
 		delete(shouldBeDead, fnName)
 	}
 
-	for fugitive, _ := range shouldBeDead {
+	for fugitive := range shouldBeDead {
 		t.Errorf("%q should have been found dead, but wasn't", fugitive)
 	}
 }
